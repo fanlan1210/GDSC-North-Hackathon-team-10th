@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MealController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PlaceAreaController;
 use App\Http\Controllers\PlaceBuildController;
 use App\Http\Controllers\PlaceRoomController;
@@ -46,8 +47,8 @@ Route::prefix('/shop')->group(function () {
 	Route::get('/{id}', [ShopController::class, 'show']);
 });
 
-Route::prefix('/meal')->group(function(){
-    Route::get('/{id}', [MealController::class, 'show']);
+Route::prefix('/meal')->group(function () {
+	Route::get('/{id}', [MealController::class, 'show']);
 });
 
 
@@ -55,17 +56,17 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/user')->group(function () {
 		Route::get('/{id}', [UserController::class, 'show']);
 		Route::delete('/{id}', [UserController::class, 'delete']);
-        Route::get('/', [UserController::class, 'index']);
+		Route::get('/', [UserController::class, 'index']);
 	});
 
-    Route::prefix('/place_area')->group(function(){
-        Route::post('/', [PlaceAreaController::class, 'store']);
-        Route::post('/{id}/build', [PlaceBuildController::class, 'store']);
-    });
+	Route::prefix('/place_area')->group(function () {
+		Route::post('/', [PlaceAreaController::class, 'store']);
+		Route::post('/{id}/build', [PlaceBuildController::class, 'store']);
+	});
 
-    Route::prefix('/place_build')->group(function(){
-        Route::post('/{id}/room', [PlaceRoomController::class, 'store']);
-    });
+	Route::prefix('/place_build')->group(function () {
+		Route::post('/{id}/room', [PlaceRoomController::class, 'store']);
+	});
 
 	Route::prefix('/shop')->group(function () {
 		Route::post('/', [ShopController::class, 'store']);
@@ -78,4 +79,7 @@ Route::middleware('auth:sanctum')->group(function () {
 		Route::delete('/{id}', [UserPlaceController::class, 'index']);
 	});
 
+	Route::prefix('/order')->group(function () {
+		Route::get('/', [OrderController::class, 'index']);
+	});
 });
