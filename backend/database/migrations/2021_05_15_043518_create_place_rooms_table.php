@@ -19,7 +19,7 @@ class CreatePlaceRoomsTable extends Migration
             $table->string('name', 50);
             $table->timestamps();
 
-            $table->foreign('build_id')->references('id')->on('place_builds');
+            $table->foreign('build_id')->references('id')->on('place_builds')->onDelete('cascade');
         });
     }
 

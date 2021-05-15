@@ -21,8 +21,8 @@ class CreateOrderMealsTable extends Migration
             $table->text('note');
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('user_orders');
-            $table->foreign('meal_id')->references('id')->on('meals');
+            $table->foreign('order_id')->references('id')->on('user_orders')->onDelete('cascade');
+            $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
         });
     }
 

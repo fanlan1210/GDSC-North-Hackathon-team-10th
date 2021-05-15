@@ -22,8 +22,8 @@ class CreateShopsTable extends Migration
             $table->tinyInteger('status');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('area_id')->references('id')->on('place_areas');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('area_id')->references('id')->on('place_areas')->onDelete('cascade');
         });
     }
 

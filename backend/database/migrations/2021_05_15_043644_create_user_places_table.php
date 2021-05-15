@@ -21,8 +21,8 @@ class CreateUserPlacesTable extends Migration
             $table->text('detail');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('place_id')->references('id')->on('place_rooms');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('place_id')->references('id')->on('place_rooms')->onDelete('cascade');
         });
     }
 

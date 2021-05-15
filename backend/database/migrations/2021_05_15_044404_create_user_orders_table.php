@@ -24,10 +24,10 @@ class CreateUserOrdersTable extends Migration
             // $table->dateTime('order_time');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('shop_id')->references('id')->on('shops');
-            $table->foreign('user_place_id')->references('id')->on('user_places');
-            $table->foreign('delivery_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('user_place_id')->references('id')->on('user_places')->onDelete('cascade');
+            $table->foreign('delivery_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }
