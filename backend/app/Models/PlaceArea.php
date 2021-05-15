@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PlaceArea extends Model
 {
     use HasFactory;
+
+    public function builds()
+    {
+        return $this->hasMany(PlaceBuild::class, 'area_id');
+    }
 }

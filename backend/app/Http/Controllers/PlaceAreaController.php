@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PlaceAreaController extends Controller
 {
+    public function index()
+    {
+        return PlaceArea::all();
+    }
+
     public function show($id)
     {
         return PlaceArea::findOrFail($id);
@@ -18,5 +23,12 @@ class PlaceAreaController extends Controller
         $area->name = $request->input('name');
 
         $area->save();
+    }
+
+    public function getBuilds($id)
+    {
+        $area = PlaceArea::findOrFail($id);
+
+        return $area->builds;
     }
 }
