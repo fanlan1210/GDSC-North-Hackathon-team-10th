@@ -20,4 +20,11 @@ class PlaceBuildController extends Controller
 
         $build->save();
     }
+
+    public function getRooms($id)
+    {
+        $build = PlaceBuild::findOrFail($id);
+
+        return $build->rooms;
+    }
 }

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class PlaceRoom extends Model
 {
     use HasFactory;
+
+    public function build()
+    {
+        return $this->belongsTo(PlaceBuild::class, 'build_id');
+    }
+
 }

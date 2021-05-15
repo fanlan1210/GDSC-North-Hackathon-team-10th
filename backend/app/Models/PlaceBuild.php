@@ -13,4 +13,9 @@ class PlaceBuild extends Model
     {
         return $this->belongsTo(PlaceArea::class, 'area_id');
     }
+
+    public function rooms()
+    {
+        return $this->hasMany(PlaceRoom::class, 'build_id');
+    }
 }
