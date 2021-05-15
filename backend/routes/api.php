@@ -90,11 +90,11 @@ Route::middleware('auth:sanctum')->group(function () {
 		Route::post('/', [OrderController::class, 'store']);
         Route::get('/{id}', [OrderController::class, 'show']);
 		Route::delete('/{id}', [OrderController::class, 'cancel']);
-		Route::update('/{id}/accept', [OrderController::class, 'accept']);
-		Route::update('/{id}/cook', [OrderController::class, 'cook']);
-		Route::update('/{id}/wait', [OrderController::class, 'wait']);
-		Route::update('/{id}/deliver', [OrderController::class, 'deliver']);
-		Route::update('/{id}/arrive', [OrderController::class, 'arrive']);
-		Route::update('/{id}/finish', [OrderController::class, 'finish']);
+		Route::put('/{id}/accept', [OrderController::class, 'accept']);
+		Route::put('/{id}/cook', [OrderController::class, 'cook']);
+		Route::put('/{id}/wait', [OrderController::class, 'wait']);
+		Route::put('/{id}/deliver', [OrderController::class, 'deliver']);
+		Route::put('/{id}/arrive', [OrderController::class, 'arrive']);
+		Route::put('/{id}/finish', [OrderController::class, 'finish']);
 	});
 });
