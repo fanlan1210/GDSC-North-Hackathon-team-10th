@@ -119,13 +119,19 @@ class OrderController extends Controller
         $carController = new CarController;
         $items = $carController->index($request);
 
+        Redis::del($key);
+
         foreach($items as $item){
+            $temp_key = $key."_".$item['meal_id'];
+
             $orderMeal = new OrderMeal;
             $orderMeal->order_id = $order->id;
             $orderMeal->meal_id = $item['meal_id'];
             $orderMeal->quantity = $item['quantity'];
             $orderMeal->note = $item['note'];
             $orderMeal->save();
+
+            Redis::del($temp_key);
         }
         return ['id'=>$order->id];
     }
