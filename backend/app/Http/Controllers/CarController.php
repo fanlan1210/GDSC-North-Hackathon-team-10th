@@ -14,6 +14,7 @@ class CarController extends Controller
 
         $mealId = $request->input('meal_id');
         $number = $request->input('number');
+        $note = $request->input('note');
 
         $meal = Meal::findOrFail($mealId);
 
@@ -29,7 +30,8 @@ class CarController extends Controller
         Redis::hmset($key."_".$mealId,
             'meal_id', $mealId,
             'shop_id', $meal->shop_id,
-            'quantity', $number
+            'quantity', $number,
+            'note', $note
         );
 
         # reset time expired
@@ -54,6 +56,7 @@ class CarController extends Controller
                 'meal_id' => Redis::hget($temp_key, 'meal_id'),
                 'quantity' => Redis::hget($temp_key, 'quantity'),
                 'shop_id' => Redis::hget($temp_key, 'shop_id'),
+                'note' => Redis::hget($temp_key, 'note'),
             ]);
         }
         return $ans;
