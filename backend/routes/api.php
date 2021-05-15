@@ -42,6 +42,11 @@ Route::prefix('/place_room')->group(function () {
 
 Route::prefix('/shop')->group(function () {
 	Route::get('/', [ShopController::class, 'index']);
+    Route::get('/{id}/meals', [ShopController::class, 'getMeals']);
+});
+
+Route::prefix('/meal')->group(function(){
+    Route::get('/{id}', [MealController::class, 'show']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -58,5 +63,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/place_build')->group(function(){
         Route::post('/{id}/room', [PlaceRoomController::class, 'store']);
+    });
+
+    Route::prefix('/shop')->group(function(){
+        Route::post('/{id}/meal', [MealController::class, 'store']);
+    });
+
+    Route::prefix('/meal')->group(function(){
+        Route::delete('/{id}', [MealController::class, 'delete']);
     });
 });

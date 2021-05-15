@@ -11,4 +11,11 @@ class ShopController extends Controller
 	{
 		return Shop::all();
 	}
+
+    public function getMeals($id)
+    {
+        $shop = Shop::findOrFail($id);
+
+        return $shop->meals;
+    }
 }
