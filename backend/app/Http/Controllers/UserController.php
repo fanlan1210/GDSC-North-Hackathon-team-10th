@@ -9,6 +9,11 @@ use PhpOption\None;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return User::all();
+    }
+
     public function login(Request $request)
     {
         $user = User::where('account', $request->input('account'))->first();
@@ -36,9 +41,12 @@ class UserController extends Controller
         $user->save();
     }
 
-    public function show(Request $request)
+    public function show($id, Request $request)
     {
-        return $request->user();
+        if($id == $request->user()->id)
+            return $request->user();
+        // else
+        //     return response(['msg'=>'permision denied.'], 403);
     }
 
     public function delete(Request $request)

@@ -46,8 +46,9 @@ Route::prefix('/shop')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/user')->group(function () {
-		Route::get('/', [UserController::class, 'show']);
+		Route::get('/{id}', [UserController::class, 'show']);
 		Route::delete('/', [UserController::class, 'delete']);
+        Route::get('/', [UserController::class, 'index']);
 	});
 
     Route::prefix('/place_area')->group(function(){
