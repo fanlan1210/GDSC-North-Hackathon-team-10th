@@ -35,5 +35,9 @@ class ShopController extends Controller {
 		}
 	}
 
-	
+	public function getMeals($id) {
+		$shop = Shop::findOrFail($id);
+
+		return $shop->meals;
+	}
 }

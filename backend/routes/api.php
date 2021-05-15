@@ -42,12 +42,18 @@ Route::prefix('/place_room')->group(function () {
 
 Route::prefix('/shop')->group(function () {
 	Route::get('/', [ShopController::class, 'index']);
+    Route::get('/{id}/meals', [ShopController::class, 'getMeals']);
+});
+
+Route::prefix('/meal')->group(function(){
+    Route::get('/{id}', [MealController::class, 'show']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/user')->group(function () {
-		Route::get('/', [UserController::class, 'show']);
+		Route::get('/{id}', [UserController::class, 'show']);
 		Route::delete('/', [UserController::class, 'delete']);
+        Route::get('/', [UserController::class, 'index']);
 	});
 
     Route::prefix('/place_area')->group(function(){
