@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MealController;
+use App\Http\Controllers\PlaceAreaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,14 +17,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::prefix('user')->group(function(){
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/', [UserController::class, 'register']);
 });
+Route::prefix('place_area')->group(function(){
+    Route::get('/{id}', [PlaceAreaController::class, 'show']);
+});
+
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/user', [UserController::class, 'show']);
-    Route::delete('/user', [UserController::class, 'delete']);
+    Route::prefix('/user')->group(function(){
+        Route::get('/', [UserController::class, 'show']);
+        Route::delete('/', [UserController::class, 'delete']);
+    });
+
+    Route::prefix('place_area')->group(function(){
+        Route::post('/', [PlaceAreaController::class, 'store']);
+    });
 });
