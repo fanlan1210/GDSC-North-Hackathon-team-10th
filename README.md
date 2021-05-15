@@ -4,13 +4,13 @@ GDSC 北區黑客松：第十組
 
 * 作品名稱
 * 作者名字 (含信箱)
-  * 繁嵐 (fanlanzhang@gmail.com)
-  * 老王 ()
-  * sj113654 ()
-  * Linwebs ()
-  * 羲加加 (cpp1092020@gmail.com)
+    * 繁嵐 ()
+    * 老王 ()
+    * sj113654 ()
+    * Linwebs ()
+    * 羲加加 (cpp1092020@gmail.com)
 * LICENSE 種類
-  * MIT LICENSE
+    * MIT LICENSE
 * 想要解決什麼問題
 * 使用到的技術
 * 如何使用
