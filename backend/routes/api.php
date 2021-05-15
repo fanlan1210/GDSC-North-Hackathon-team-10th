@@ -6,6 +6,7 @@ use App\Http\Controllers\PlaceBuildController;
 use App\Http\Controllers\PlaceRoomController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPlaceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ Route::prefix('/meal')->group(function(){
     Route::get('/{id}', [MealController::class, 'show']);
 });
 
+
 Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/user')->group(function () {
 		Route::get('/{id}', [UserController::class, 'show']);
@@ -68,4 +70,12 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/shop')->group(function () {
 		Route::post('/', [ShopController::class, 'store']);
 	});
+
+    Route::prefix('/user_place')->group(function () {
+		Route::post('/', [UserPlaceController::class, 'store']);
+		Route::get('/{id}', [UserPlaceController::class, 'show']);
+		Route::get('/', [UserPlaceController::class, 'index']);
+		Route::delete('/{id}', [UserPlaceController::class, 'index']);
+	});
+
 });
