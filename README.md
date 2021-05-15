@@ -6,7 +6,7 @@ GDSC 北區黑客松：第十組
 * 作者名字 (含信箱)
     * 繁嵐 ()
     * 老王 ()
-    * sj113654 ()
+    * sj113654 (sj113654@gmail.com)
     * Linwebs ()
     * 羲加加 (cpp1092020@gmail.com)
 * LICENSE 種類
