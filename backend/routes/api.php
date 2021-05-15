@@ -52,7 +52,7 @@ Route::prefix('/meal')->group(function(){
 Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/user')->group(function () {
 		Route::get('/{id}', [UserController::class, 'show']);
-		Route::delete('/', [UserController::class, 'delete']);
+		Route::delete('/{id}', [UserController::class, 'delete']);
         Route::get('/', [UserController::class, 'index']);
 	});
 

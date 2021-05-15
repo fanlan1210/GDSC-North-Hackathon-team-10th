@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 use PhpOption\None;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return User::all();
+        if($request->user()->isAdmin())
+            return User::all();
+        else
+            return response(['msg'=>'Permision denied.'], 403);
     }
 
     public function login(Request $request)
@@ -43,15 +47,21 @@ class UserController extends Controller
 
     public function show($id, Request $request)
     {
-        if($id == $request->user()->id)
-            return $request->user();
-        // else
-        //     return response(['msg'=>'permision denied.'], 403);
+        $user = User::findOrFail($id);
+        if($request->user()->can('view', $user))
+            return $user;
+        else
+            return response(['msg'=>'Permision denied.'], 403);
     }
 
-    public function delete(Request $request)
+    public function delete($id, Request $request)
     {
-        $user = User::find($request->user()->id);
-        $user->delete();
+
+        $user = User::find($id);
+
+        if($request->user()->can('view', $user))
+            $user->delete();
+        else
+            return response(['msg'=>'Permision denied.'], 403);
     }
 }
