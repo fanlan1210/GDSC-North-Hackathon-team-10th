@@ -19,7 +19,7 @@ class PlaceAreaController extends Controller
 
     public function store(Request $request)
     {
-        if($request->user()->can('store', PlaceArea::class)){
+        if($this->authorize('store', PlaceArea::class)){
             $area = new PlaceArea();
             $area->name = $request->input('name');
 

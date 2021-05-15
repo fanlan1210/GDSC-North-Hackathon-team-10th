@@ -14,7 +14,7 @@ class PlaceBuildController extends Controller
 
     public function store($id, Request $request)
     {
-        if($request->user()->can('store', PlaceBuild::class)){
+        if($this->authorize('store', PlaceBuild::class)){
             $build = new PlaceBuild();
             $build->name = $request->input('name');
             $build->area_id = $id;

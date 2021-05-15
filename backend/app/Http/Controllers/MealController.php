@@ -14,7 +14,7 @@ class MealController extends Controller
 
     public function store($id, Request $request)
     {
-        if($request->user()->can('store', Meal::class)){
+        if($this->authorize('store', Meal::class)){
             $meal = new Meal;
             $meal->shop_id = $id;
             $meal->name = $request->input('name');
@@ -28,7 +28,7 @@ class MealController extends Controller
 
     public function delete($id, Request $request)
     {
-        if($request->user()->can('store', Meal::class)){
+        if($this->authorize('store', Meal::class)){
             $meal = Meal::findOrFail($id);
             $meal->delete();
         }

@@ -35,7 +35,7 @@ class UserPlaceController extends Controller
     public function delete($id, $request)
     {
         $place = UserPlace::findOrFail($id);
-        if($request->user()->can('store', $place)){
+        if($this->authorize('store', $place)){
             $place->delete();
         }
     }

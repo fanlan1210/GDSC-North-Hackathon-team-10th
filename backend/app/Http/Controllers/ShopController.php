@@ -15,7 +15,7 @@ class ShopController extends Controller {
 		$shop = new Shop();
 
 		$user_shop_search = $shop::where('user_id', $request->input('user_id'))->get();
-		if ($user_shop_search->isEmpty() && $request->user()->can('store', Shop::class)) {
+		if ($user_shop_search->isEmpty() && $this->authorize('store', Shop::class)) {
 
 			$shop_name_search = $shop::where('name', $request->input('name'))->where('area_id', $request->input('area_id'))->get();
 			if ($shop_name_search->isEmpty()) {

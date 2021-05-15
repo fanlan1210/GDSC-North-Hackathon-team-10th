@@ -14,7 +14,7 @@ class PlaceRoomController extends Controller
 
     public function store($id, Request $request)
     {
-        if($request->user()->can('store', PlaceRoom::class)){
+        if($this->authorize('store', PlaceRoom::class)){
             $room = new PlaceRoom();
             $room->name = $request->input('name');
             $room->build_id = $id;

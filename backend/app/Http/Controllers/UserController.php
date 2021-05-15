@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 use PhpOption\None;
 
@@ -12,7 +13,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->user()->can('index', User::class))
+        if($this->authorize('index', User::class))
             return User::all();
     }
 
@@ -46,7 +47,7 @@ class UserController extends Controller
     public function show($id, Request $request)
     {
         $user = User::findOrFail($id);
-        if($request->user()->can('view', $user))
+        if($this->authorize('view', $user))
             return $user;
     }
 
@@ -55,7 +56,7 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        if($request->user()->can('view', $user))
+        if($this->authorize('view', $user))
             $user->delete();
     }
 }
