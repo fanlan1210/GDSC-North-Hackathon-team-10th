@@ -11,8 +11,32 @@ class OrderController extends Controller
 {
     public function index()
     {
+        // 只有未被外宋元接受的
+        $orders = UserOrder::where('status', 1)->get();
+        foreach($orders as $order){
+            $order['meals'] = $order->meals;
+        }
+        return $orders;
+    }
 
-	}
+    public function show($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('view', $order)){
+            $order['meals'] = $order->meals;
+            return $order;
+        }
+    }
+
+    public function accept($id, Request $request)
+    {
+        if($this->authorize('accept', UserOrder::class)){
+            $order = UserOrder::findOrFail($id);
+            $order->status = 2;
+            $order->delivery_id = $request->user()->id;
+            $order->save();
+        }
+    }
 
     public function store(Request $request)
     {
@@ -34,7 +58,7 @@ class OrderController extends Controller
         $order->user_place_id = $request->input('user_place_id');
         $order->delivery_id = null;
         $order->note = $request->input('note');
-        $order->status = 0;
+        $order->status = 1;
         $order->save();
 
         // 取得 Redis 中 購物車內容
@@ -49,5 +73,6 @@ class OrderController extends Controller
             $orderMeal->note = $item['note'];
             $orderMeal->save();
         }
+        return ['id'=>$order->id];
     }
 }

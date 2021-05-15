@@ -33,4 +33,9 @@ class UserOrder extends Model
 	protected $hidden = [
 
 	];
+
+    public function meals()
+    {
+        return $this->hasMany(OrderMeal::class, 'order_id');
+    }
 }
