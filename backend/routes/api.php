@@ -58,4 +58,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/place_build')->group(function(){
         Route::post('/{id}/room', [PlaceRoomController::class, 'store']);
     });
+
+	Route::prefix('/shop')->group(function () {
+		Route::post('/', [ShopController::class, 'store']);
+	});
 });
