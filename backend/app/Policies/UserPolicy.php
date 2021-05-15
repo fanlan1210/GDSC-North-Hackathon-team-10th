@@ -28,4 +28,12 @@ class UserPolicy
             return false;
 
     }
+
+    public function index(User $user)
+    {
+        if($user->isAdmin())
+            return true;
+        else
+            return false;
+    }
 }

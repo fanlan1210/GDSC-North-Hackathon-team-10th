@@ -12,10 +12,8 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->user()->isAdmin())
+        if($request->user()->can('index', User::class))
             return User::all();
-        else
-            return response(['msg'=>'Permision denied.'], 403);
     }
 
     public function login(Request $request)
@@ -50,8 +48,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if($request->user()->can('view', $user))
             return $user;
-        else
-            return response(['msg'=>'Permision denied.'], 403);
     }
 
     public function delete($id, Request $request)
@@ -61,7 +57,5 @@ class UserController extends Controller
 
         if($request->user()->can('view', $user))
             $user->delete();
-        else
-            return response(['msg'=>'Permision denied.'], 403);
     }
 }
