@@ -25,7 +25,7 @@ class ShopController extends Controller {
 				$shop->area_id = $request->input('area_id');
 				$shop->status = 1;
 				$shop->save();
-				$result = ['status' => 'ok', 'id', $shop->id];
+				$result = ['status' => 'ok', 'id' => $shop->id];
 				return json_encode($result);
 			} else {
 				return response(['msg' => 'already have this shop in this area'], 403);
@@ -33,6 +33,11 @@ class ShopController extends Controller {
 		} else {
 			return response(['msg' => 'user already have a shop'], 403);
 		}
+	}
+
+	public function show($id)
+	{
+		return Shop::findOrFail($id);
 	}
 
 	public function getMeals($id) {

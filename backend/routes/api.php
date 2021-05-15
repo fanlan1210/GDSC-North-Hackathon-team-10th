@@ -42,7 +42,7 @@ Route::prefix('/place_room')->group(function () {
 
 Route::prefix('/shop')->group(function () {
 	Route::get('/', [ShopController::class, 'index']);
-    Route::get('/{id}/meals', [ShopController::class, 'getMeals']);
+	Route::get('/{id}', [ShopController::class, 'show']);
 });
 
 Route::prefix('/meal')->group(function(){
