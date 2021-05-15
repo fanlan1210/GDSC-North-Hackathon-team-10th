@@ -15,14 +15,29 @@ class CarController extends Controller
         $mealId = $request->input('meal_id');
         $number = $request->input('number');
 
-        // if(!Redis::hExists($key, $mealId)){
-        Redis::hset($key, $mealId, $number);
-        // }else{
-            // $origin_num = Redis::hget($key, $mealId);
-            // Redis::hset($key, $mealId, $number+$origin_num);
-        // }
+        $meal = Meal::findOrFail($mealId);
 
+        # 處理 不同商店的問題
+        $datas = Redis::SMEMBERS($key);
+        foreach($datas as $data){
+            if (Redis::hget($key."_".$data, 'shop_id') != $meal->shop_id){
+                return response(['msg' => 'different shop'], 500);
+            }
+        }
+        # 存入 redis
+        Redis::sadd($key, $mealId);
+        Redis::hmset($key."_".$mealId,
+            'meal_id', $mealId,
+            'shop_id', $meal->shop_id,
+            'quantity', $number
+        );
+
+        # reset time expired
         Redis::expire($key, 60*30); // 30 mins
+        $datas = Redis::SMEMBERS($key);
+        foreach($datas as $data){
+            Redis::expire($key."_".$data, 60*30);
+        }
 
         return $this->index($request);
     }
@@ -31,12 +46,14 @@ class CarController extends Controller
     {
         $key = "car_".$request->user()->id;
 
-        $keys = Redis::hgetall($key);
+        $keys = Redis::SMEMBERS($key);
         $ans = [];
-        foreach ($keys as $key => $value) {
+        foreach ($keys as $orderId) {
+            $temp_key = $key."_".$orderId;
             array_push($ans, [
-                'meal_id' => $key,
-                'quantity' =>$value
+                'meal_id' => Redis::hget($temp_key, 'meal_id'),
+                'quantity' => Redis::hget($temp_key, 'quantity'),
+                'shop_id' => Redis::hget($temp_key, 'shop_id'),
             ]);
         }
         return $ans;
