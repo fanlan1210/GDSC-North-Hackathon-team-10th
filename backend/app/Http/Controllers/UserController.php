@@ -24,7 +24,7 @@ class UserController extends Controller
         if ($user){
             if($user->password == hash('sha256', $request->input('password'))){
                 $token = $user->createToken('api_token')->plainTextToken;
-                return response(['token'=>$token]);
+                return response(['id'=>$user->id, 'token'=>$token]);
             }
         }
 
