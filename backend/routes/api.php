@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PlaceAreaController;
@@ -77,6 +78,11 @@ Route::middleware('auth:sanctum')->group(function () {
 		Route::get('/{id}', [UserPlaceController::class, 'show']);
 		Route::get('/', [UserPlaceController::class, 'index']);
 		Route::delete('/{id}', [UserPlaceController::class, 'index']);
+	});
+
+    Route::prefix('/car')->group(function () {
+		Route::post('/', [CarController::class, 'append']);
+        Route::get('/', [CarController::class, 'index']);
 	});
 
 	Route::prefix('/order')->group(function () {
