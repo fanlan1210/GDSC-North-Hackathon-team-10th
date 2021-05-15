@@ -37,7 +37,7 @@ Route::prefix('/place_room')->group(function(){
     Route::get('/{id}', [PlaceRoomController::class, 'show']);
 });
 
-Route::middleware('/auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function(){
     Route::prefix('/user')->group(function(){
         Route::get('/', [UserController::class, 'show']);
         Route::delete('/', [UserController::class, 'delete']);
