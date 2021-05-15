@@ -24,6 +24,15 @@ class Shop extends Model
 		'status'
 	];
 
+	/**
+	 * The attributes that should be hidden for arrays.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+
+	];
+
 	public function area() {
 		return $this->belongsTo(PlaceArea::class, 'area_id');
 	}
