@@ -38,6 +38,60 @@ class OrderController extends Controller
         }
     }
 
+    public function cook($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('cook', $order)){
+            $order->status = 3;
+            $order->save();
+        }
+    }
+
+    public function wait($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('cook', $order)){
+            $order->status = 4;
+            $order->save();
+        }
+    }
+
+    public function deliver($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('deliver', $order)){
+            $order->status = 5;
+            $order->save();
+        }
+    }
+
+    public function arrive($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('deliver', $order)){
+            $order->status = 6;
+            $order->save();
+        }
+    }
+
+    public function finish($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('finish', $order)){
+            $order->status = 7;
+            $order->save();
+        }
+    }
+
+    public function cancel($id, Request $request)
+    {
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('finish', $order)){
+            $order->status = 8;
+            $order->save();
+        }
+    }
+
     public function store(Request $request)
     {
         $key = "car_".$request->user()->id;

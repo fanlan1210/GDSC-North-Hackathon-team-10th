@@ -87,8 +87,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
 	Route::prefix('/order')->group(function () {
 		Route::get('/', [OrderController::class, 'index']);
-		Route::get('/{id}', [OrderController::class, 'show']);
 		Route::post('/', [OrderController::class, 'store']);
-		Route::post('/{id}/accept', [OrderController::class, 'accept']);
+        Route::get('/{id}', [OrderController::class, 'show']);
+		Route::delete('/{id}', [OrderController::class, 'cancel']);
+		Route::update('/{id}/accept', [OrderController::class, 'accept']);
+		Route::update('/{id}/cook', [OrderController::class, 'cook']);
+		Route::update('/{id}/wait', [OrderController::class, 'wait']);
+		Route::update('/{id}/deliver', [OrderController::class, 'deliver']);
+		Route::update('/{id}/arrive', [OrderController::class, 'arrive']);
+		Route::update('/{id}/finish', [OrderController::class, 'finish']);
 	});
 });

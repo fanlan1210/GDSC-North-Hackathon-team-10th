@@ -26,6 +26,21 @@ class UserOrderPolicy
         return $user->type == 1;
     }
 
+    public function cook(User $user, UserOrder $order)
+    {
+        return $user->type == 2 && Shop::findOrFail($order->shop_id)->user_id == $user->id;
+    }
+
+    public function deliver(User $user, UserOrder $order)
+    {
+        return $user->type == 1 && $order->delivery_id == $user->id;
+    }
+
+    public function finish(User $user, UserOrder $order)
+    {
+        return $order->user_id == $user->id;
+    }
+
     public function view(User $user, UserOrder $order)
     {
         // 只有 下單人、送或者、店家 才有權限 review
