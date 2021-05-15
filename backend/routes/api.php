@@ -45,14 +45,10 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('/place_area')->group(function(){
         Route::post('/', [PlaceAreaController::class, 'store']);
+        Route::post('/{id}/build', [PlaceBuildController::class, 'store']);
     });
 
     Route::prefix('/place_build')->group(function(){
-        Route::post('/', [PlaceBuildController::class, 'store']);
+        Route::post('/{id}/room', [PlaceRoomController::class, 'store']);
     });
-
-    Route::prefix('/place_room')->group(function(){
-        Route::post('/', [PlaceRoomController::class, 'store']);
-    });
-
 });

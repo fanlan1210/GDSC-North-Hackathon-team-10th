@@ -12,11 +12,11 @@ class PlaceBuildController extends Controller
         return PlaceBuild::findOrFail($id);
     }
 
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         $build = new PlaceBuild();
         $build->name = $request->input('name');
-        $build->area_id = $request->input('area_id');
+        $build->area_id = $id;
 
         $build->save();
     }

@@ -12,11 +12,11 @@ class PlaceRoomController extends Controller
         return PlaceRoom::findOrFail($id);
     }
 
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         $room = new PlaceRoom();
         $room->name = $request->input('name');
-        $room->build_id = $request->input('build_id');
+        $room->build_id = $id;
 
         $room->save();
     }
