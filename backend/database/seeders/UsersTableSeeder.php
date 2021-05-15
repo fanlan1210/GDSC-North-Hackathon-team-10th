@@ -23,11 +23,7 @@ class UsersTableSeeder extends Seeder
           'email' => 'a001@example.com',
           'phone' => '0912345678',
           'password' => hash('sha256', 'a001'),
-          'type' => 1,
-          'email_verified_at' => NULL,
-          'remember_token' => NULL,
-          'created_at' => NULL,
-          'updated_at' => NULL
+          'type' => 0
       ]);
 
       User::create([
@@ -37,11 +33,7 @@ class UsersTableSeeder extends Seeder
           'email' => 'a002@example.com',
           'phone' => '0964531520',
           'password' => hash('sha256', 'a002'),
-          'type' => 1,
-          'email_verified_at' => NULL,
-          'remember_token' => NULL,
-          'created_at' => NULL,
-          'updated_at' => NULL
+          'type' => 0
       ]);
 
       # delivery
@@ -52,11 +44,7 @@ class UsersTableSeeder extends Seeder
           'email' => 'b001@example.com',
           'phone' => '0944567891',
           'password' => hash('sha256', 'b001'),
-          'type' => 2,
-          'email_verified_at' => NULL,
-          'remember_token' => NULL,
-          'created_at' => NULL,
-          'updated_at' => NULL
+          'type' => 1
       ]);
 
       User::create([
@@ -66,11 +54,7 @@ class UsersTableSeeder extends Seeder
           'email' => 'b002@example.com',
           'phone' => '0949564130',
           'password' => hash('sha256', 'b002'),
-          'type' => 2,
-          'email_verified_at' => NULL,
-          'remember_token' => NULL,
-          'created_at' => NULL,
-          'updated_at' => NULL
+          'type' => 1
       ]);
 
       # owner
@@ -81,11 +65,7 @@ class UsersTableSeeder extends Seeder
           'email' => 'c001@example.com',
           'phone' => '0994567891',
           'password' => hash('sha256', 'c001'),
-          'type' => 3,
-          'email_verified_at' => NULL,
-          'remember_token' => NULL,
-          'created_at' => NULL,
-          'updated_at' => NULL
+          'type' => 2
       ]);
 
       User::create([
@@ -95,11 +75,7 @@ class UsersTableSeeder extends Seeder
           'email' => 'c002@example.com',
           'phone' => '049803156',
           'password' => hash('sha256', 'c002'),
-          'type' => 3,
-          'email_verified_at' => NULL,
-          'remember_token' => NULL,
-          'created_at' => NULL,
-          'updated_at' => NULL
+          'type' => 2
       ]);
     }
 }
