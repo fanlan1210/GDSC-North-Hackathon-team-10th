@@ -14,11 +14,13 @@ class PlaceBuildController extends Controller
 
     public function store($id, Request $request)
     {
-        $build = new PlaceBuild();
-        $build->name = $request->input('name');
-        $build->area_id = $id;
+        if($request->user()->can('store', PlaceBuild::class)){
+            $build = new PlaceBuild();
+            $build->name = $request->input('name');
+            $build->area_id = $id;
 
-        $build->save();
+            $build->save();
+        }
     }
 
     public function getRooms($id)

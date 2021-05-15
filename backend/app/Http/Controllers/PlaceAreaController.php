@@ -19,10 +19,12 @@ class PlaceAreaController extends Controller
 
     public function store(Request $request)
     {
-        $area = new PlaceArea();
-        $area->name = $request->input('name');
+        if($request->user()->can('store', PlaceArea::class)){
+            $area = new PlaceArea();
+            $area->name = $request->input('name');
 
-        $area->save();
+            $area->save();
+        }
     }
 
     public function getBuilds($id)

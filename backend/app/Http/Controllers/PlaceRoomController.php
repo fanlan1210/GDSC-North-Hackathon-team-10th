@@ -14,10 +14,12 @@ class PlaceRoomController extends Controller
 
     public function store($id, Request $request)
     {
-        $room = new PlaceRoom();
-        $room->name = $request->input('name');
-        $room->build_id = $id;
+        if($request->user()->can('store', PlaceRoom::class)){
+            $room = new PlaceRoom();
+            $room->name = $request->input('name');
+            $room->build_id = $id;
 
-        $room->save();
+            $room->save();
+        }
     }
 }
