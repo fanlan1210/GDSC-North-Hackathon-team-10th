@@ -14,19 +14,23 @@ class MealController extends Controller
 
     public function store($id, Request $request)
     {
-        $meal = new Meal;
-        $meal->shop_id = $id;
-        $meal->name = $request->input('name');
-        $meal->price = $request->input('price');
-        $meal->status = $request->input('status');
-        $meal->note = $request->input('note');
+        if($request->user()->can('store', Meal::class)){
+            $meal = new Meal;
+            $meal->shop_id = $id;
+            $meal->name = $request->input('name');
+            $meal->price = $request->input('price');
+            $meal->status = $request->input('status');
+            $meal->note = $request->input('note');
 
-        $meal->save();
+            $meal->save();
+        }
     }
 
     public function delete($id, Request $request)
     {
-        $meal = Meal::findOrFail($id);
-        $meal->delete();
+        if($request->user()->can('store', Meal::class)){
+            $meal = Meal::findOrFail($id);
+            $meal->delete();
+        }
     }
 }
