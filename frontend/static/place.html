@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#FFFFFF">
+	<meta name="mobile-web-app-capable" content="yes">
+	<title>CatEat</title>
+	<link rel="icon" href="https://delivery.csie.linwebs.tw/favicon.ico">
+	<link rel="shortcut icon" href="/favicon.ico" type="https://delivery.csie.linwebs.tw/image/png">
+	<link rel="apple-touch-icon" href="/favicon.png">
+	<link rel="apple-touch-icon-precomposed" href="/favicon.png">
+	<link rel="apple-touch-startup-image" href="/favicon.png">
+        <link rel="image_src" href="/favicon.png">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://delivery.csie.linwebs.tw/css/jquery-editable-select.min.css">
+	<!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<link rel="stylesheet" href="https://delivery.csie.linwebs.tw/css/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://delivery.csie.linwebs.tw/js/jquery-editable-select.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/fontawesome.min.js"></script>
+	<link rel = "stylesheet" href = "cateat_css.css"> 
+</head>
+<body>
+<nav class="navbar navbar-header sticky-top navbar-expand-lg navbar-light">
+	<div class="container">
+		<a class="navbar-brand" href="#">
+			<img src="cateat_logo.png" alt="CatEat" class="d-inline-block align-top navbar-logo">
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-lg-0">
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="/">首頁</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/shop">店家</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/login">登入/註冊</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>	<div class="container basic-area">
+		<h2>請選擇送餐地點</h2>
+		<hr />
+		<h3 class="mt-4 mb-4">我的地點</h3>
+		<div class="table-responsive">
+			<table class="table table-striped", id = "table">
+				<thead>
+				<tr>
+					<th>名稱</th>
+					<th>校區</th>
+					<th>建築物</th>
+					<th>空間</th>
+					<th>備註</th>
+					<th>選擇</th>
+				</tr>
+				</thead>
+				<tbody>
+									<tr>
+						<td colspan="6" rowspan="3" class="text-center"><a href="/login">請先登入</a></td>
+					</tr>
+								</tbody>
+			</table>
+		</div>
+		<h3 class="mt-4">新地點</h3>
+		<div class="row">
+							<div class="col-sm-12 col-md-6 col-lg-3">
+					<a href="/place/add/1" class="m-5 text-deco-none">
+						<div class="card">
+							<img src="https://delivery.csie.linwebs.tw/img/area/1" class="card-img-top" alt="蘭潭校區">
+							<div class="card-body">
+								<h5 class="card-title">蘭潭校區</h5>
+							</div>
+						</div>
+					</a>
+				</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+					<a href="/place/add/2" class="m-5 text-deco-none">
+						<div class="card">
+							<img src="https://delivery.csie.linwebs.tw/img/area/2" class="card-img-top" alt="民雄校區">
+							<div class="card-body">
+								<h5 class="card-title">民雄校區</h5>
+							</div>
+						</div>
+					</a>
+				</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+					<a href="/place/add/3" class="m-5 text-deco-none">
+						<div class="card">
+							<img src="https://delivery.csie.linwebs.tw/img/area/3" class="card-img-top" alt="新民校區">
+							<div class="card-body">
+								<h5 class="card-title">新民校區</h5>
+							</div>
+						</div>
+					</a>
+				</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+					<a href="/place/add/4" class="m-5 text-deco-none">
+						<div class="card">
+							<img src="https://delivery.csie.linwebs.tw/img/area/4" class="card-img-top" alt="林森校區">
+							<div class="card-body">
+								<h5 class="card-title">林森校區</h5>
+							</div>
+						</div>
+					</a>
+				</div>
+					</div>
+	</div>
+
+</body>
+</html>

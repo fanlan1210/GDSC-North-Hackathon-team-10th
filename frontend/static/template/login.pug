@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+    .container-fluid
+    .row
+        .col-sm-12.col-md-3
+        .col-sm-12.col-md-6
+            .index-area-top
+                form#login( method='post')
+                    p.index-description.text-secondary.text-center 登入
+                    .mb-3
+                        label.form-label(for='account') 帳號
+                        input#account.form-control(type='text' name='account' placeholder='請輸入帳號' required='')
+                    .mb-3
+                        label.form-label(for='password') 密碼
+                        input#password.form-control(type='password' name='password' placeholder='請輸入密碼' required='')
+                    .text-center
+                        button.btn.btn-green.login-btn(type='submit')
+                            | 登入
+                        a.btn.btn-secondary.login-btn(href='/register')
+                            | 註冊

@@ -1,0 +1,26 @@
+nav {
+	background-color: #FF9C8E;
+}
+
+body {
+	background-color: #FAE0DA;
+}
+
+a {
+	color: #47291A;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.table {
+	background-color: #FFF5EA;
+}
+
+.card.ticket-info {
+	background-color: #FFF5EA;
+}
+
+.btn, .card-body, .badge {
+	background-color: #B6866F;
+	color: white;
+}
