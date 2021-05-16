@@ -3,34 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\PlaceArea;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
-class PlaceAreaController extends Controller
-{
-    public function index()
-    {
-        return PlaceArea::all();
-    }
+class PlaceAreaController extends Controller {
+	public function index() {
+		return PlaceArea::all();
+	}
 
-    public function show($id)
-    {
-        return PlaceArea::findOrFail($id);
-    }
+	public function show($id) {
+		try {
+			return PlaceArea::findOrFail($id);
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this area'];
+			return json_encode($result);
+		}
+	}
 
-    public function store(Request $request)
-    {
-        if($this->authorize('store', PlaceArea::class)){
-            $area = new PlaceArea();
-            $area->name = $request->input('name');
+	public function store(Request $request) {
+		if ($this->authorize('store', PlaceArea::class)) {
+			$area = new PlaceArea();
 
-            $area->save();
-        }
-    }
+			$find = $area::where('name', $request->input('name'))->get();
 
-    public function getBuilds($id)
-    {
-        $area = PlaceArea::findOrFail($id);
+			if ($find->isEmpty()) {
+				$area->name = $request->input('name');
 
-        return $area->builds;
-    }
+				$area->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			} else {
+				$result = ['status' => '409', 'msg' => 'area already exist'];
+				return json_encode($result);
+			}
+
+		}
+	}
+
+	public function getBuilds($id) {
+		try {
+			$area = PlaceArea::findOrFail($id);
+			return $area->builds;
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this area'];
+			return json_encode($result);
+		}
+	}
 }

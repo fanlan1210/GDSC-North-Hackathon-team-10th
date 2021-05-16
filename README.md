@@ -9,7 +9,7 @@ GDSC 北區黑客松：第十組
     * 繁嵐 (09360484@me.mcu.edu.tw)
     * 老王 (levi900227@gmail.com)
     * sj113654 (sj113654@gmail.com)
-    * Linwebs ()
+    * Linwebs (linwebs@linwebs.tw)
     * 羲加加 (cpp1092020@gmail.com)
 * LICENSE 種類
     * MIT LICENSE
