@@ -52,7 +52,6 @@ Route::prefix('/meal')->group(function () {
 	Route::get('/{id}', [MealController::class, 'show']);
 });
 
-
 Route::middleware('auth:sanctum')->group(function () {
 	Route::prefix('/user')->group(function () {
 		Route::get('/{id}', [UserController::class, 'show']);
