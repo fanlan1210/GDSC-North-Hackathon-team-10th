@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderMeal;
+use App\Models\Shop;
 use App\Models\UserOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -13,6 +14,17 @@ class OrderController extends Controller
     {
         // 只有未被外宋元接受的
         $orders = UserOrder::where('status', 1)->get();
+        foreach($orders as $order){
+            $order['meals'] = $order->meals;
+        }
+        return $orders;
+    }
+
+    public function shop_index($id, Request $request)
+    {
+        $shop_id = Shop::where('user_id', $request->user()->id)->first()->id;
+
+        $orders = UserOrder::whereIn('status', array(2, 3, 4))->where('shop_id', $shop_id)->get();
         foreach($orders as $order){
             $order['meals'] = $order->meals;
         }
