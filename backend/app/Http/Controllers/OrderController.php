@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\OrderMeal;
 use App\Models\Shop;
 use App\Models\UserOrder;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -18,79 +20,132 @@ class OrderController extends Controller {
 		return $orders;
 	}
 
-    public function shop_index($id, Request $request)
-    {
-        $shop_id = Shop::where('user_id', $request->user()->id)->first()->id;
+	public function shop_index($id, Request $request) {
+		$shop_id = Shop::where('user_id', $request->user()->id)->first()->id;
 
-        $orders = UserOrder::whereIn('status', array(2, 3, 4))->where('shop_id', $shop_id)->get();
-        foreach($orders as $order){
-            $order['meals'] = $order->meals;
-        }
-        return $orders;
-    }
+		$orders = UserOrder::whereIn('status', array(2, 3, 4))->where('shop_id', $shop_id)->get();
+		foreach ($orders as $order) {
+			$order['meals'] = $order->meals;
+		}
+		return $orders;
+	}
 
 	public function show($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('view', $order)) {
-			$order['meals'] = $order->meals;
-			return $order;
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('view', $order)) {
+				$order['meals'] = $order->meals;
+				return $order;
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function accept($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('accept', $order)) {
-			$order->status = 2;
-			$order->delivery_id = $request->user()->id;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('accept', $order)) {
+				$order->status = 2;
+				$order->delivery_id = $request->user()->id;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function cook($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('cook', $order)) {
-			$order->status = 3;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('cook', $order)) {
+				$order->status = 3;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function wait($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('wait', $order)) {
-			$order->status = 4;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('wait', $order)) {
+				$order->status = 4;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function deliver($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('deliver', $order)) {
-			$order->status = 5;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('deliver', $order)) {
+				$order->status = 5;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function arrive($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('arrive', $order)) {
-			$order->status = 6;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('arrive', $order)) {
+				$order->status = 6;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function finish($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('finish', $order)) {
-			$order->status = 7;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('finish', $order)) {
+				$order->status = 7;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
 	public function cancel($id, Request $request) {
-		$order = UserOrder::findOrFail($id);
-		if ($this->authorize('cancel', $order)) {
-			$order->status = 8;
-			$order->save();
+		try {
+			$order = UserOrder::findOrFail($id);
+			if ($this->authorize('cancel', $order)) {
+				$order->status = 8;
+				$order->save();
+				$result = ['status' => 'ok'];
+				return json_encode($result);
+			}
+		} catch (ModelNotFoundException $e) {
+			$result = ['status' => '404', 'msg' => 'no this order'];
+			return json_encode($result);
 		}
 	}
 
