@@ -30,8 +30,8 @@ class OrderController extends Controller
 
     public function accept($id, Request $request)
     {
-        if($this->authorize('accept', UserOrder::class)){
-            $order = UserOrder::findOrFail($id);
+        $order = UserOrder::findOrFail($id);
+        if($this->authorize('accept', $order)){
             $order->status = 2;
             $order->delivery_id = $request->user()->id;
             $order->save();
@@ -50,7 +50,7 @@ class OrderController extends Controller
     public function wait($id, Request $request)
     {
         $order = UserOrder::findOrFail($id);
-        if($this->authorize('cook', $order)){
+        if($this->authorize('wait', $order)){
             $order->status = 4;
             $order->save();
         }
@@ -68,7 +68,7 @@ class OrderController extends Controller
     public function arrive($id, Request $request)
     {
         $order = UserOrder::findOrFail($id);
-        if($this->authorize('deliver', $order)){
+        if($this->authorize('arrive', $order)){
             $order->status = 6;
             $order->save();
         }
@@ -86,7 +86,7 @@ class OrderController extends Controller
     public function cancel($id, Request $request)
     {
         $order = UserOrder::findOrFail($id);
-        if($this->authorize('finish', $order)){
+        if($this->authorize('cancel', $order)){
             $order->status = 8;
             $order->save();
         }
