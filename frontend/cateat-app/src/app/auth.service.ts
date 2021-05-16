@@ -16,7 +16,7 @@ export class AuthService {
    }
 
   login(body: FormData){
-    return this.http.post<User>("/user/login",body);
+    return this.http.post<User>("https://api.mcncc.linwebs.tw/user/login",body);
   }
 
   register(body: FormData){
